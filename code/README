@@ -1,2 +1,3 @@
+Please run the installknn.sh to install the package in advance.
 R code enable us to apply KNN time series forecast taking parallel jobs as inputs
-We submitted the job to HPC to finish all 101 stock predictions
+We used submitnew.sh to submit the job to HPC to finish all 101 stock predictions
