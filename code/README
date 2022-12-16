@@ -1,3 +1,8 @@
 Please run the installknn.sh to install the package in advance.
+
 R code enable us to apply KNN time series forecast taking parallel jobs as inputs
+1. Project.R is the original R code for getting the prediction
+2. Project_rate.R(also merge.sh) is the code adding the part the compute the change rate of the prediction. (we do not use it at last)
+3. UpdatedProject.R is the code that we make the plots with fewer training data.(the 60th data doesn't have enough data, so we still use the original code for graph)
+
 We used submitnew.sh to submit the job to HPC to finish all 101 stock predictions
