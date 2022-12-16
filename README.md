@@ -1,4 +1,4 @@
-# 605-Project
+# 605-Project-Group 9
 
 ## code
 The code folder contains the code we used, details can be found the readme in the folder
