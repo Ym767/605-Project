@@ -11,3 +11,6 @@ This contains the new graphes that we plot less training data.
 
 ## old images.tar
 This contains the old graphs that we plot all the training data.
+
+## report.Rmd and report.html
+These two are the Project final report.
