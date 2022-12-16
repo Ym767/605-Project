@@ -1,0 +1,71 @@
+---
+title: "Report"
+output: html_document
+date: "2022-12-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Group 9: Jiayang Wang, Xilin Qiao, Yeming Wei, Zhanpeng Xu, Zheming Cao
+
+## Introduction
+
+#### The dataset we are going to study is the daily minute-by-minute historical prices of the Nifty 101 stocks and indices traded in the Indian stock market from February 2, 2015, to October 24, 2022. We are interested in the trends of these stocks over the next twenty days. So we need to build a model to get the prediction results. Based on the fact that the data is time-varying, we choose the statistical method of time series regression for future trend prediction. By comparing different models in R, we choose KNN for forecasting. We use computational clusters (statistical HPC) for one hundred stocks in this dataset. After obtaining the picture of the trend forecast for the next 20 days for these 101 stocks, we performed further analysis on three representative stocks. Our model didn’t perform well on all stocks, which makes sense because stock is a series depending on highly randomized marketing trend, and thus hard to predict with historical prices.
+
+## Data
+
+https://www.kaggle.com/datasets/debashis74017/stock-market-data-nifty-50-stocks-1-min-data?resource=download&select=ACC_minute_data_with_indicators.csv
+
+#### This dataset is 66 GB in total, with 101 sub-datasets of no more than 1 GB each, for which we only focus on the column’s "date" and "opening", so we remove the other columns.
+
+## Statistical Model
+
+#### There is more than one prediction model for time series in R, the KNN time series forecast is a k nearest average with decreasing weight with distance increasing, instead of a machine learning method that when inputting instanceds will compare the training data then find the k closest data and average them to get the prediction result. By implementing KNN forecast, we can capture more information of short term characteristics of stock, which accords with the short term dependency of stock price series, so KNN forecast is an ideal choice for our project.
+
+#### Step 1: We use the tsfknn package in R to predict the stock trend for the next 40 days by running the closing prices of all history data except the latest 20 days’. Of the 40 days’ prediction, we predict 20 days, which was used to test the accuracy of our prediction.
+
+#### Step 2: We run these one hundred datasets in parallel on HPC to obtain pictures for these 101 stocks.
+
+#### Step 3: We downloaded the image package, and selected three representative stocks for analysis.
+
+## Usage
+
+#### The number of jobs we run is 101, the current running time of the job is 50 minutes, and occupied memory space is 2.81GB. We employ more than one core. Because the HPC 2600M is the maximum allowed memories for one CPU, so we can allocate more memory space by assigning more CPUs by setting –CPUs-per-task.
+
+## Results
+
+#### For all graphs, black points show training data, blue points show testing data, and red points show predictions. The higher the overlap of the red point and the blue point, the more accurate our prediction is.
+
+#### MM
+```{r}
+knitr::include_graphics("~/Desktop/1.png")
+```
+
+#### Since the testing and prediction points shown in this graph are mostly matched, we can trust our predictions. The picture shows that this stock price will be relatively stable in the future.
+
+#### AUROPHARMA
+```{r}
+knitr::include_graphics("~/Desktop/2.png")
+```
+
+#### We can see that the overall trend of the testing points is up, while the downward trend of our prediction points indicates that our model is not accurate in predicting this stock. So we need to be very careful when buying and selling this stock.
+
+#### PEL
+```{r}
+knitr::include_graphics("~/Desktop/3.png")
+```
+
+#### The graph shows that the blue and red lines are in opposite directions and do not overlap at all, which indicates that our predictions are sometimes invalid.
+
+## Weaknesses
+#### KNN is a powerful tool predicting trends, but the data trending may depend on complex factors, especially for stock. It is a pity that our KNN model failed in quite a number of stocks, but as a fact, our model predicted with accurate trends in most cases. 
+#### Besides, KNN is very computationally intensive and slow.
+## Conclusion
+#### It is feasible to use KNN model to forecast stocks, but the result is not always ideal. By testing the prediction results, we find our model indicates a right trend for most cases. Overall, the stock market is unpredictable, and we need to be cautious in buying and selling stocks even with quite accurate prediction result. KNN showed its potential for forecasting and could be improved to predict more stocks in other countries in the future.
+## Contribution
+#### Everyone participated in the presentation. 
+#### Code part: Zhanpeng Xu, Zheming Cao and Xilin Qiao.
+#### Report part: Jiayang Wang and Yeming Wei.
+
+GitHub link: https://github.com/Ym767/605-Project
